@@ -1,8 +1,13 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeatherConcurremcyApp.AppCore.Interfaces;
+using WeatherConcurremcyApp.AppCore.Services;
+using WeatherConcurrencyApp.Domain.Interfaces;
+using WeatherConcurrencyApp.Infraestructura.OpenWeatherClient;
 
 namespace Presentacion
 {
@@ -16,6 +21,12 @@ namespace Presentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            var builder = new ContainerBuilder();
+            builder.RegisterType<HttpOpenWeatherClient>().As<IHttpOpenWeatherClient>();
+            builder.RegisterType<HttpOpenWeatherClientService>().As<IHttpOpenWeatherClientService>();
+            var container = builder.Build();
+
             Application.Run(new Form1());
         }
     }
