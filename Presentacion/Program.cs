@@ -8,6 +8,7 @@ using WeatherConcurremcyApp.AppCore.Interfaces;
 using WeatherConcurremcyApp.AppCore.Services;
 using WeatherConcurrencyApp.Domain.Interfaces;
 using WeatherConcurrencyApp.Infraestructura.OpenWeatherClient;
+using WeatherConcurrencyApp.Infraestructura.Repository;
 
 namespace Presentacion
 {
@@ -25,9 +26,14 @@ namespace Presentacion
             var builder = new ContainerBuilder();
             builder.RegisterType<HttpOpenWeatherClient>().As<IHttpOpenWeatherClient>();
             builder.RegisterType<HttpOpenWeatherClientService>().As<IHttpOpenWeatherClientService>();
+
+            builder.RegisterType<WeatherRepository>().As<IWeatherRepository>();
+            builder.RegisterType<WeatherRepositoryService>().As<IWeatherRepositoryService>();
             var container = builder.Build();
 
-            Application.Run(new Form1(container.Resolve<IHttpOpenWeatherClientService>()));
+            
+
+            Application.Run(new Form1(container.Resolve<IHttpOpenWeatherClientService>(), container.Resolve<IWeatherRepositoryService>()));
         }
     }
 }

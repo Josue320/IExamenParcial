@@ -12,6 +12,10 @@ namespace WeatherConcurremcyApp.AppCore.Services
     public class HttpOpenWeatherClientService : IHttpOpenWeatherClientService
     {
         public IHttpOpenWeatherClient httpOpenWeatherClient;
+        public HttpOpenWeatherClientService(IHttpOpenWeatherClient openWeatherClient)
+        {
+            this.httpOpenWeatherClient = openWeatherClient;
+        }
         public DateTime convertToDateTime(long milisegundos)
         {
             return httpOpenWeatherClient.convertToDateTime(milisegundos);

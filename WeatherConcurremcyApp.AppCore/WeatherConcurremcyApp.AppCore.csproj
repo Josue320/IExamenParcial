@@ -70,8 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IHttpOpenWeatherClientService.cs" />
+    <Compile Include="Interfaces\IWeatherRepositoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HttpOpenWeatherClientService.cs" />
+    <Compile Include="Services\WeatherRepositoryService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
