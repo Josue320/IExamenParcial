@@ -27,7 +27,7 @@ namespace Presentacion
             builder.RegisterType<HttpOpenWeatherClientService>().As<IHttpOpenWeatherClientService>();
             var container = builder.Build();
 
-            Application.Run(new Form1());
+            Application.Run(new Form1(container.Resolve<IHttpOpenWeatherClientService>()));
         }
     }
 }
