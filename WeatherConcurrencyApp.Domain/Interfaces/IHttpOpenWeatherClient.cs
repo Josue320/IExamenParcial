@@ -9,8 +9,9 @@ namespace WeatherConcurrencyApp.Domain.Interfaces
 {
     public interface IHttpOpenWeatherClient
     {
-        Task<OpenWeather> GetWeatherByCityNameAsync(string city);
+        Task<ForeCastInfo> GetWeatherByCityNameAsync(double lon, double lat);
         DateTime convertToDateTime(long milisegundos);
         string GetImageLocation(Weather w);
+        Task<OpenWeather> GetWeather(string city);
     }
 }

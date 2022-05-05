@@ -12,11 +12,13 @@ namespace WeatherConcurrencyApp.Infraestructura.OpenWeatherClient
 {
     public class HttpOpenWeatherClient : IHttpOpenWeatherClient
     {
-        public async Task<OpenWeather> GetWeatherByCityNameAsync(string city)
+        public async Task<ForeCastInfo> GetWeatherByCityNameAsync(double lon, double lat)
         {
 
-            string url = $"{AppSettings.ApiUrl}{city}&units={AppSettings.Units}&lang=sp&appid={AppSettings.Token}";
+            long dt = DateTimeOffset.Now.ToUnixTimeSeconds();
+            string url = $"{AppSettings.ApiUrl}lat={lat}&lon={lon}&dt={dt}&appid={AppSettings.Token}";
             string jsonObject = string.Empty;
+            
             try
             {
                 using (HttpClient httpClient = new HttpClient())
@@ -29,7 +31,7 @@ namespace WeatherConcurrencyApp.Infraestructura.OpenWeatherClient
                     throw new NullReferenceException("El objeto json no puede ser null.");
                 }
 
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenWeather>(jsonObject);
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<ForeCastInfo>(jsonObject);
             }
             catch (Exception)
             {
@@ -48,6 +50,34 @@ namespace WeatherConcurrencyApp.Infraestructura.OpenWeatherClient
         {
             string imageLocation = $@"https://openweathermap.org/img/w/{w.Icon}.png";
             return imageLocation;
+        }
+
+        public async Task<OpenWeather> GetWeather(string city)
+        {
+            string ApiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+            string url = $"{ApiUrl}{city}&units={AppSettings.Units}&lang=sp&appid={AppSettings.Token}";
+            string jsonObject = string.Empty;
+            try
+            {
+                
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    
+                    jsonObject = await httpClient.GetAsync(url).Result.Content.ReadAsStringAsync();
+                }
+
+                if (string.IsNullOrEmpty(jsonObject))
+                {
+                    throw new NullReferenceException("El objeto json no puede ser null.");
+                }
+
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenWeather>(jsonObject);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
     }

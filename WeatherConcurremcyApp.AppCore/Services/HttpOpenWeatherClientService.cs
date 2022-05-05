@@ -26,9 +26,14 @@ namespace WeatherConcurremcyApp.AppCore.Services
             return httpOpenWeatherClient.GetImageLocation(w);
         }
 
-        public Task<OpenWeather> GetWeatherByCityNameAsync(string city)
+        public Task<OpenWeather> GetWeather(string city)
         {
-            return httpOpenWeatherClient.GetWeatherByCityNameAsync(city);
+            return httpOpenWeatherClient.GetWeather(city);
+        }
+
+        public Task<ForeCastInfo> GetWeatherByCityNameAsync(double lon, double lat )
+        {
+            return httpOpenWeatherClient.GetWeatherByCityNameAsync(lon,lat);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Presentacion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,8 +24,8 @@ namespace WeatherConcurrencyApp
         public WeatherPanel()
         {
             InitializeComponent();
-           
-            
+
+
             flpContent.Controls.Add(d1);
             flpContent.Controls.Add(d2);
             flpContent.Controls.Add(d3);
@@ -34,8 +35,15 @@ namespace WeatherConcurrencyApp
             flpContent.Controls.Add(d7);
             flpContent.Controls.Add(d8);
 
-        }
+            d1.lblDetail.Text = "Temperatura maxima";
+            d2.lblDetail.Text = "Temperatura minima";
+            d3.lblDetail.Text = "Humedad";
+            d4.lblDetail.Text = "Pais";
+            d5.lblDetail.Text = "Presion";
+            d6.lblDetail.Text = "Velocidad viento";
+            d7.lblDetail.Text = "Amanecer";
+            d8.lblDetail.Text = "Atardecer";
 
-       
+        }
     }
 }
