@@ -56,6 +56,7 @@ namespace Presentacion
                     info.label7.Text = forecast.hourly[i].wind_speed.ToString();
                     info.label10.Text = forecast.hourly[i].pressure.ToString();
                     info.picClima.ImageLocation = $"{AppSettings.ApiIcon}" + forecast.hourly[i].weather[0].Icon + ".png";
+                    info.lblTemperatura.Text = forecast.hourly[i].temp - 273.15 + "C";
                     flpDatos.Controls.Add(info);
                 }
 
